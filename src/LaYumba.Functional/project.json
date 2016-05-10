@@ -1,0 +1,18 @@
+﻿{
+   "version": "1.0.0-*",
+   "description": "LaYumba.Functional Class Library",
+   "authors": [ "Enrico Buonanno" ],
+   "tags": [ "" ],
+   "projectUrl": "",
+   "licenseUrl": "",
+
+   "frameworks": {
+      "dnx451": {
+         "frameworkAssemblies": {"System.Runtime": "4.0.10.0"}
+      }
+   },
+   "dependencies": {
+      "System.Collections.Immutable": "1.1.37",
+      "Mono.Reflection": "1.1.0.0"
+   }
+}

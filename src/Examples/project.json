@@ -1,0 +1,31 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Examples Console Application",
+  "authors": [ "enrico.buonanno" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "LaYumba.Functional": "",
+    "Dapper": "1.42.0",
+    "NUnitLite": "3.2.0"
+  },
+
+  "commands": {
+    "run": "Examples"
+  },
+
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Configuration": "4.0.0.0",
+        "System.Net.Http": "4.0.0.0"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+﻿{
+   "version": "1.0.0-*",
+   "description": "LaYumba.Functional.Tests Class Library",
+   "authors": [ "Enrico Buonanno" ],
+   "tags": [ "" ],
+   "projectUrl": "",
+   "licenseUrl": "",
+
+   "frameworks": {
+      "dnx451": {
+         "frameworkAssemblies": { "System.Runtime": "4.0.10.0" }
+      }
+   },
+   "dependencies": {
+      "LaYumba.Functional": "",
+      "NUnitLite": "3.2.1"
+   },
+
+   "commands": {
+      "test": "LaYumba.Functional.Tests"
+   }
+}

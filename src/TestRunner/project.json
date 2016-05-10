@@ -1,0 +1,25 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "TestRunner Console Application",
+  "authors": [ "enrico.buonanno" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "LaYumba.Functional.Tests": "",
+    "Boc": ""
+  },
+
+  "commands": {
+    "test": "TestRunner"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}

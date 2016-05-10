@@ -1,0 +1,28 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Exercises Console Application",
+  "authors": [ "enrico.buonanno" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "LaYumba.Functional": "",
+    "NUnitLite": "3.2.1",
+
+  },
+
+  "commands": {
+    "Exercises": "Exercises"
+  },
+
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": { "System.Configuration": "4.0.0.0" }
+    }
+  }
+}
