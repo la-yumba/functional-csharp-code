@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace LaYumba.Functional.Tests
 {
    [TestFixture]
-   public class Unit
+   public class Unit_Test
    {
       [Test]
       public void ThereCanOnlyBeOneUnit()

@@ -15,7 +15,7 @@ namespace LaYumba.Functional
 
       public R Match(object value)
          => (R)funcs.First(InputArgMatchesTypeOf(value))
-            .DynamicInvoke(new[] { value });
+            .DynamicInvoke(value);
 
       static Func<Delegate, bool> InputArgMatchesTypeOf(object value)
          => func => value.GetType().FullName
