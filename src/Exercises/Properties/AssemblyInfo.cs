@@ -5,14 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Exercises")]
-[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SoftwareONE")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Exercises")]
-[assembly: AssemblyCopyright("Copyright © SoftwareONE 2016")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -20,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("120d88f4-b0f1-4153-a7bc-2097e2c057d7")]
+[assembly: Guid("c21d2aa1-e2d0-44e9-978e-6ba2be502224")]

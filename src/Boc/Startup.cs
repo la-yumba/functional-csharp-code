@@ -1,48 +1,56 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.SwaggerGen;
 
 namespace Boc
 {
-    public class Startup
-    {   
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
+   public class Startup
+   {
+      public Startup(IHostingEnvironment env)
+      {
+         var builder = new ConfigurationBuilder()
+             .SetBasePath(env.ContentRootPath)
+             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+             .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+             .AddEnvironmentVariables();
+         Configuration = builder.Build();
+      }
 
-            services.AddSwaggerGen();
-            services.ConfigureSwaggerDocument(options =>
-            {
-                options.SingleApiVersion(new Info
-                {
-                    Version = "v1",
-                    Title = "Examples",
-                    Description = "Examples for Functional Programming in C#",
-                });
-            });
-            services.ConfigureSwaggerSchema(options =>
-            {
-                options.DescribeAllEnumsAsStrings = true;
-            });
-        }
+      public IConfigurationRoot Configuration { get; }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            loggerFactory.AddConsole();
-            loggerFactory.AddDebug();
+      // This method gets called by the runtime. Use this method to add services to the container.
+      public void ConfigureServices(IServiceCollection services)
+      {
+         // Add framework services.
+         services.AddMvc();
 
-            app.UseSwaggerGen();
-            app.UseSwaggerUi();
+         // Swagger not working with RC2 at the moment... leave this for later
 
-            app.UseIISPlatformHandler();
+         //services.AddSwaggerGen();
+         //services.ConfigureSwaggerDocument(options =>
+         //{
+         //   options.SingleApiVersion(new Info
+         //   {
+         //      Version = "v1",
+         //      Title = "Examples",
+         //      Description = "Examples for Functional Programming in C#",
+         //   });
+         //});
+         //services.ConfigureSwaggerSchema(options =>
+         //{
+         //   options.DescribeAllEnumsAsStrings = true;
+         //});
+      }
 
-            app.UseStaticFiles();
+      // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+      public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+      {
+         loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+         loggerFactory.AddDebug();
 
-            app.UseMvc();
-        }
-
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
-    }
+         app.UseMvc();
+      }
+   }
 }

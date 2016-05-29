@@ -1,31 +1,25 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": "Examples Console Application",
-  "authors": [ "enrico.buonanno" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-
-  "compilationOptions": {
+  "buildOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "LaYumba.Functional": "",
-    "Dapper": "1.42.0",
-    "NUnitLite": "3.2.0"
-  },
-
-  "commands": {
-    "run": "Examples"
+   "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.0-rc2-3002702"
+   },
+   "Dapper": "1.50.0-rc2a",
+   "LaYumba.Functional": "*",
+   "NUnitLite": "3.2.1",
+   "System.Data.Common": "4.0.1-rc2-24027",
+   "System.Data.SqlClient": "4.1.0-rc2-24027",
+   "System.Collections.Specialized": "4.0.1-rc2-24027"
   },
 
   "frameworks": {
-    "dnx451": {
-      "frameworkAssemblies": {
-        "System.Configuration": "4.0.0.0",
-        "System.Net.Http": "4.0.0.0"
-      }
+    "netcoreapp1.0": {
+      "imports": [ "dnxcore50" ]
     }
   }
 }

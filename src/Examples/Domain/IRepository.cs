@@ -1,4 +1,5 @@
 ﻿using System;
+using Examples.Chapter9.Try;
 using LaYumba.Functional;
 
 namespace Examples.Domain

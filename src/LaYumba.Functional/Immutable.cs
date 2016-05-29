@@ -1,5 +1,4 @@
-﻿using Mono.Reflection;
-using System;
+﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -12,8 +11,7 @@ namespace LaYumba.Functional
       {
          T @new = source.ShallowCopy();
 
-         typeof(T).GetProperty(propertyName)
-            .GetBackingField()
+         typeof(T).GetBackingField(propertyName)
             .SetValue(@new, newValue);
 
          return @new;
@@ -30,5 +28,13 @@ namespace LaYumba.Functional
          => (T)source.GetType().GetMethod("MemberwiseClone"
                , BindingFlags.Instance | BindingFlags.NonPublic)
             .Invoke(source, null);
+
+      static string BackingFieldName(string propertyName)
+         => string.Format("<{0}>k__BackingField", propertyName);
+      
+      static FieldInfo GetBackingField(this Type t, string propertyName)
+         => t.GetField(BackingFieldName(propertyName)
+            , BindingFlags.Instance | BindingFlags.NonPublic);
    }
 }
+

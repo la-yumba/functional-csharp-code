@@ -8,7 +8,7 @@ namespace Boc.Services.Validation.WithoutInterfaces
 {
    public class SufficientBalanceValidator : IValidator<Transfer>
    {
-      private readonly Repository<Account> accounts;
+      private readonly IRepository<Account> accounts;
 
       public bool IsValid(Transfer request)
          => IsValid(request, id => accounts.Get(id));

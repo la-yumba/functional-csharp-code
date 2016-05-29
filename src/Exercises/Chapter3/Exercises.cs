@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Configuration;
+//using System.Configuration;
 using LaYumba.Functional;
 
 namespace Exercises.Chapter3
@@ -28,16 +28,16 @@ namespace Exercises.Chapter3
     // `.config` file?
     public class AppConfig
     {
-        NameValueCollection source;
+      NameValueCollection source;
 
-        public AppConfig() : this(ConfigurationManager.AppSettings) { }
+      //public AppConfig() : this(ConfigurationManager.AppSettings) { }
 
-        public AppConfig(NameValueCollection source)
-        {
-            this.source = source;
-        }
+      public AppConfig(NameValueCollection source)
+      {
+         this.source = source;
+      }
 
-        public Option<T> Get<T>(string name)
+      public Option<T> Get<T>(string name)
         {
             throw new NotImplementedException("your implementation here...");
         }

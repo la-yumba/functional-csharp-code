@@ -1,6 +1,5 @@
 using System;
 using Boc.Commands;
-using Boc.Events;
 
 namespace Boc.Domain
 {
@@ -18,11 +17,6 @@ namespace Boc.Domain
 
       public void Debit(TransferNow transfer)
       {
-      }
-
-      public DebitedFee Charge(Fee fee)
-      {
-         return new DebitedFee(this.Id, fee.Amount, fee.Description);
       }
 
       public Account WithBalance(decimal balance)

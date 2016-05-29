@@ -22,19 +22,7 @@ namespace LaYumba.Functional
 
       public static implicit operator Option<T>(T value) => Some(value);
       public static implicit operator Option<T>(NoneType _) => None;
-
-      //public Option<R> Bind<R>(Func<T, Option<R>> func)
-      //    => IsSome
-      //        ? func(Value)
-      //        : F.None;
-
-      //public Option<R> Map<R>(Func<T, R> func)
-      //    => IsSome
-      //        ? Option.Of(func(Value))
-      //        : F.None;
-
-      //public T GetOrElse(T @default) => IsSome ? Value : @default;
-
+      
       public R Match<R>(Func<T, R> Some, Func<R> None)
           => IsSome ? Some(Value) : None();
 
@@ -79,8 +67,8 @@ namespace LaYumba.Functional
          , Func<T, IEnumerable<R>> func)
           => @this.AsEnumerable().Bind(func);
 
-      public static Unit ForEach<T>(this Option<T> opt, Action<T> action)
-         => opt.IsSome ? action.ToFunc()(opt.Value) : Unit();
+      public static Option<Unit> ForEach<T>(this Option<T> @this, Action<T> action)
+         => Map(@this, action.ToFunc());
 
       public static T GetOrElse<T>(this Option<T> opt, T defaultValue) 
          => opt.Match(

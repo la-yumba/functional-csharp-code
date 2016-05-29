@@ -3,29 +3,25 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:2101/",
+      "applicationUrl": "http://localhost:50999/",
       "sslPort": 0
     }
   },
   "profiles": {
-    "test": {
-      "commandName": "test",
-      "commandLineArgs": "-wait"
-    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
-        "Hosting:Environment": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "web": {
-      "commandName": "web",
+    "Boc": {
+      "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger/ui",
+      "launchUrl": "http://localhost:5000/api/values",
       "environmentVariables": {
-        "Hosting:Environment": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

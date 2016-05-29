@@ -2,7 +2,7 @@
 using NSubstitute;
 using NUnit.Framework;
 using System;
-using Boc.Chapter1.V2.Data;
+using Boc.Data;
 using Boc.Commands;
 using Boc.Domain;
 using Boc.Services.Validation.WithOption;

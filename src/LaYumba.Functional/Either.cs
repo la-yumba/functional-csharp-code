@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using static LaYumba.Functional.F;
 
 namespace LaYumba.Functional
 {
@@ -29,23 +28,11 @@ namespace LaYumba.Functional
       public static implicit operator Either<L, R>(L left) => new Either<L, R>(left);
       public static implicit operator Either<L, R>(R right) => new Either<L, R>(right);
 
-      public TResult Match<TResult>(Func<R, TResult> Right, Func<L, TResult> Left)
-          => IsRight ? Right(this.Right) : Left(this.Left);
+      public TR Match<TR>(Func<L, TR> Left, Func<R, TR> Right)
+         => IsLeft ? Left(this.Left) : Right(this.Right);
 
-      public Unit Match(Action<R> isRight, Action<L> isLeft)
-         => IsRight ? isRight.ToFunc()(this.Right) : isLeft.ToFunc()(this.Left);
-
-      public Either<L, TResult> Map<TResult>(Func<R, TResult> func)
-          => IsRight ? func(this.Right) : new Either<L, TResult>(this.Left);
-
-      public Either<L, Unit> ForEach(Action<R> act)
-      {
-         if (IsLeft) { return Left; }
-         else { act(Right); return Unit(); }
-      }
-
-      public Either<L, TResult> Bind<TResult>(Func<R, Either<L, TResult>> func)
-          => IsRight ? func(this.Right) : new Either<L, TResult>(this.Left);
+      public Unit Match(Action<L> Left, Action<R> Right)
+         => Match(Left.ToFunc(), Right.ToFunc());
 
       public IEnumerator<R> AsEnumerable()
       {
@@ -55,45 +42,17 @@ namespace LaYumba.Functional
 
    public static class Either
    {
+      public static Either<L, RR> Map<L, R, RR>(this Either<L, R> @this
+         , Func<R, RR> func) => @this.IsRight ? func(@this.Right) : new Either<L, RR>(@this.Left);
 
-      //    /// <summary>
-      //    /// Monadic bind function
-      //    /// https://en.wikipedia.org/wiki/Monad_(functional_programming)
-      //    /// </summary>
-      //    /// <typeparam name="L">Left</typeparam>
-      //    /// <typeparam name="R">Right</typeparam>
-      //    /// <typeparam name="Ret"></typeparam>
-      //    /// <param name="self"></param>
-      //    /// <param name="binder"></param>
-      //    /// <returns>Bound Either</returns>
-      //    public static Either<L, Ret> Bind<L, R, Ret>(this Either<L, R> self, Func<R, Either<L, Ret>> binder) =>
-      //        self.IsBottom
-      //            ? new Either<L, Ret>(true)
-      //            : self.IsRight
-      //                ? binder(self.RightValue)
-      //                : Either<L, Ret>.Left(self.LeftValue);
+      public static Either<L, Unit> ForEach<L, R>(this Either<L, R> @this, Action<R> act)
+         => Map(@this, act.ToFunc());
 
-      //    /// <summary>
-      //    /// Filter the Either
-      //    /// This may give unpredictable results for a filtered value.  The Either won't
-      //    /// return true for IsLeft or IsRight.  IsBottom is True if the value is filterd and that
-      //    /// should be checked.
-      //    /// </summary>
-      //    /// <typeparam name="L">Left</typeparam>
-      //    /// <typeparam name="R">Right</typeparam>
-      //    /// <param name="self">Either to filter</param>
-      //    /// <param name="pred">Predicate function</param>
-      //    /// <returns>If the Either is in the Left state it is returned as-is.  
-      //    /// If in the Right state the predicate is applied to the Right value.
-      //    /// If the predicate returns True the Either is returned as-is.
-      //    /// If the predicate returns False the Either is returned in a 'Bottom' state.  IsLeft will return True, but the value 
-      //    /// of Left = default(L)</returns>
-      //    public static Either<L, R> Filter<L, R>(this Either<L, R> self, Func<R, bool> pred) =>
-      //        self.IsBottom
-      //            ? self
-      //            : match(self,
-      //                Right: t => pred(t) ? Either<L, R>.Right(t) : new Either<L, R>(true),
-      //                Left: l => Either<L, R>.Left(l));
+      public static Either<L, RR> Bind<L, R, RR>(this Either<L, R> @this
+         , Func<R, Either<L, RR>> func)
+          => @this.IsRight ? func(@this.Right) : new Either<L, RR>(@this.Left);
+
+      // LINQ
 
       public static Either<L, R> Select<L, T, R>(this Either<L, T> @this
          , Func<T, R> map) => @this.Map(map);

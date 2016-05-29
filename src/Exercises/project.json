@@ -1,28 +1,22 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": "Exercises Console Application",
-  "authors": [ "enrico.buonanno" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-
-  "compilationOptions": {
+  "buildOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "LaYumba.Functional": "",
-    "NUnitLite": "3.2.1",
-
-  },
-
-  "commands": {
-    "Exercises": "Exercises"
+   "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.0-rc2-3002702"
+   },
+   "LaYumba.Functional": "*",
+   "NUnitLite": "3.2.1",
+   "System.Collections.Specialized": "4.0.1-rc2-24027"
   },
 
   "frameworks": {
-    "dnx451": {
-      "frameworkAssemblies": { "System.Configuration": "4.0.0.0" }
-    }
+   "netcoreapp1.0": {
+      "imports": [ "dnxcore50", "net45" ]
+   }
   }
 }

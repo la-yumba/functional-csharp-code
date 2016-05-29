@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using Boc.Commands;
+﻿using System.Diagnostics.Contracts;
 using Boc.Domain;
 
 namespace Boc

@@ -33,5 +33,8 @@ namespace Boc.Domain
          result.Type = type;
          return result;
       }
+
+      //public TelephoneNumber WithType(NumberType type)
+      //   => new TelephoneNumber(type, Country, Number);
    }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace LaYumba.Functional
 {
@@ -15,7 +16,7 @@ namespace LaYumba.Functional
 
       public R Match(object value)
          => (R)funcs.First(InputArgMatchesTypeOf(value))
-            .DynamicInvoke(value);
+            .DynamicInvoke(new[] { value });
 
       static Func<Delegate, bool> InputArgMatchesTypeOf(object value)
          => func => value.GetType().FullName
