@@ -31,7 +31,7 @@ namespace Examples.Chapter0.Introduction
       public T Get(Guid id, Func<T> onMiss) 
          => Get(id) ?? onMiss();
 
-      public T Get_MoreReailstically(Guid id, Func<T> onMiss)
+      public T Get_MoreRealistically(Guid id, Func<T> onMiss)
       {
          T result = Get(id);
          if (result == null)
