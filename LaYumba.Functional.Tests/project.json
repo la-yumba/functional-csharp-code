@@ -2,20 +2,20 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "NETStandard.Library": "1.6.1",
+    "NETStandard.Library": "1.6.0",
     "LaYumba.Functional": { "target": "project" },
     "LaYumba.Functional.Data": { "target": "project" },
-    "FsCheck": { "target": "project" },//"3.0.0",
-    "FsCheck.Xunit": { "target": "project" },//"3.0.0",
-    "xunit": "2.2.0-beta4-build3444",
+    "FsCheck": "3.0.0-alpha-b740",
+    "FsCheck.Xunit": "3.0.0-alpha-b740",
+    "xunit": "2.2.0-rc2-build3523",
     "dotnet-test-xunit": "2.2.0-preview2-build1029"
   },
+  
   "testRunner": "xunit",
 
   "frameworks": {
-    "netcoreapp1.1": {
+    "netcoreapp1.0": {
       "imports": [
-        "netcoreapp1.1",
         "portable-net45+win8",
         "dnxcore50"
       ],

@@ -1,8 +1,6 @@
 ﻿{
    "projects": [
-      ".",
-      "experiments",
-      "fsCheck"
+      "."
    ]
    ,
    "sdk": {

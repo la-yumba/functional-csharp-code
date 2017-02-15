@@ -8,7 +8,6 @@ currently available as part of the Manning Early Access Program.
 
 The code samples are organized in the following projects:
 
-- **Boc.Domain**: an example of using F# for domain objects
 - **Examples**: examples used throughout the book, by chapter
 - **Exercises**: placeholders for you to do the exercises, compile and run them;
   and compare to the provided solutions
@@ -16,10 +15,11 @@ The code samples are organized in the following projects:
 - **LaYumba.Functional.Data**: very simple functional data structures discussed in Chapter 9 
 - **LaYumba.Functional.Tests**: also illustrative of topics explained in the book, and
   useful to better understand the constructs in the library
+- **Boc.Domain**: an example of using F# for domain objects
 
 **Note:** you are welcome to use `LaYumba.Functional` in your projects, and submit
 PRs with improvements, but the main intent of this library is pedagogical. 
-For a more fully-fledged functional library, consider [language-ext](https://github.com/louthy/language-ext)
+For a more fully-fledged functional library, consider [LanguageExt](https://github.com/louthy/language-ext)
 
 ## Working with the code samples
 
@@ -31,7 +31,7 @@ submit a PR or let me know via [the book forum](https://forums.manning.com/forum
 ### Prerequisites
 
 - [.NET Core 1.1 SDK](https://www.microsoft.com/net/download/core#/sdk/current) 
-v1.0.0-preview2-1-003177 (must match version specified in `global.json`)
+v1.0.0-preview2-1-003177 (must match version specified in `global.json` exactly)
 - [.NET Core 1.0 Runtime](https://www.microsoft.com/net/download/core#/runtime)
 
 ### One-time setup
@@ -44,14 +44,14 @@ $ dotnet restore
 
 ### Running the tests
 
-**Disclaimer:** running the tests at the moment is not possible, because the code uses
-the latest dependencies in .NET Core 1.1, but test runners for both NUnit and xUnit
-only support 1.0. This will be fixed, as the .NET Core ecosystem matures.
-
 ```
-$ cd LaYumba.Functional.Tests ## or other project folder
+$ cd LaYumba.Functional.Tests
 $ dotnet test
 ```
+
+**Disclaimer:** running the tests in the other projects at the moment is not possible, because the code uses
+the latest dependencies in .NET Core 1.1, but test runners for both NUnit and xUnit
+only support 1.0. This will be fixed, as the .NET Core ecosystem matures.
 
 ### Running examples
 
