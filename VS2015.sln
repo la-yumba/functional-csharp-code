@@ -21,12 +21,6 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LaYumba.Functional.Data", "
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boc.Domain", "Boc.Domain\Boc.Domain.xproj", "{0F848531-F33A-47F9-8F3F-CF6EFF59DF8B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fsCheck", "fsCheck", "{E2CC73F7-FA09-4AC7-B57C-F409E672B20B}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FsCheck", "fsCheck\FsCheck\FsCheck.xproj", "{2971EB5E-ACAC-4632-A778-001F9961CCF9}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FsCheck.Xunit", "fsCheck\FsCheck.Xunit\FsCheck.Xunit.xproj", "{B0E782AA-7652-4C93-BD84-064460F46259}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,20 +51,8 @@ Global
 		{0F848531-F33A-47F9-8F3F-CF6EFF59DF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F848531-F33A-47F9-8F3F-CF6EFF59DF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F848531-F33A-47F9-8F3F-CF6EFF59DF8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2971EB5E-ACAC-4632-A778-001F9961CCF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2971EB5E-ACAC-4632-A778-001F9961CCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2971EB5E-ACAC-4632-A778-001F9961CCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2971EB5E-ACAC-4632-A778-001F9961CCF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0E782AA-7652-4C93-BD84-064460F46259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0E782AA-7652-4C93-BD84-064460F46259}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0E782AA-7652-4C93-BD84-064460F46259}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0E782AA-7652-4C93-BD84-064460F46259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{2971EB5E-ACAC-4632-A778-001F9961CCF9} = {E2CC73F7-FA09-4AC7-B57C-F409E672B20B}
-		{B0E782AA-7652-4C93-BD84-064460F46259} = {E2CC73F7-FA09-4AC7-B57C-F409E672B20B}
 	EndGlobalSection
 EndGlobal
