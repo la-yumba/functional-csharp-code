@@ -23,16 +23,16 @@ For a more fully-fledged functional library, consider [LanguageExt](https://gith
 
 ## Working with the code samples
 
-The code samples are in .NET Core 1.1, and should compile and run on all major OS's
+*Important*: The code samples use .NET Standard 1.6 and .NET Core 1.1, and should compile and run on all major OS's
 via the `dotnet` CLI. .NET Core still has rough edges, so you may experience issues
 (with test runners, IDEs, REPLs); if you have suggestions on how to mitigate these, 
 submit a PR or let me know via [the book forum](https://forums.manning.com/forums/functional-programming-in-c-sharp).
 
 ### Prerequisites
 
-- [.NET Core 1.1 SDK](https://www.microsoft.com/net/download/core#/sdk/current) 
-v1.0.0-preview2-1-003177 (must match version specified in `global.json` exactly)
-- [.NET Core 1.0 Runtime](https://www.microsoft.com/net/download/core#/runtime)
+- [.NET Core 1.1.1 SDK](https://www.microsoft.com/net/download/core)
+
+To check this is available, type `dotnet --version` at the command prompt, and you should get `1.0.1` or greater
 
 ### One-time setup
 
@@ -48,10 +48,6 @@ $ dotnet restore
 $ cd LaYumba.Functional.Tests
 $ dotnet test
 ```
-
-**Disclaimer:** running the tests in the other projects at the moment is not possible, because the code uses
-the latest dependencies in .NET Core 1.1, but test runners for both NUnit and xUnit
-only support 1.0. This will be fixed, as the .NET Core ecosystem matures.
 
 ### Running examples
 
