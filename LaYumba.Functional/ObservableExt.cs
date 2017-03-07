@@ -40,8 +40,8 @@ namespace LaYumba.Functional
 
       public static (IObservable<T> Passed, IObservable<T> Failed) Partition<T>
          (this IObservable<T> source, Func<T, bool> predicate)
-         => (from t in source where predicate(t) select t
-            , from t in source where !predicate(t) select t);
+         => (Passed: (from t in source where predicate(t) select t)
+            , Failed: (from t in source where !predicate(t) select t));
 
       public static (IObservable<RTrue> Passed, IObservable<RFalse> Failed) Partition<T, RTrue, RFalse>
          (this IObservable<T> source

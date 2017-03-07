@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26014.0
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaYumba.Functional", "LaYumba.Functional\LaYumba.Functional.csproj", "{7501EA9C-5E54-49EC-8D92-B8F8EF7BCB59}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaYumba.Functional.Data", "LaYumba.Functional.Data\LaYumba.Functional.Data.csproj", "{1B5511F2-88CD-4E03-8699-658317D39B8A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exercises", "Exercises\Exercises.csproj", "{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaYumba.Functional.Tests", "LaYumba.Functional.Tests\LaYumba.Functional.Tests.csproj", "{9425D69D-68D8-4773-934D-068488790118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,16 +61,28 @@ Global
 		{1B5511F2-88CD-4E03-8699-658317D39B8A}.Release|x86.Build.0 = Release|Any CPU
 		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|x64.ActiveCfg = Debug|x64
-		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|x64.Build.0 = Debug|x64
-		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|x86.ActiveCfg = Debug|x86
-		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|x86.Build.0 = Debug|x86
+		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|x64.Build.0 = Debug|Any CPU
+		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Debug|x86.Build.0 = Debug|Any CPU
 		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|x64.ActiveCfg = Release|x64
-		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|x64.Build.0 = Release|x64
-		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|x86.ActiveCfg = Release|x86
-		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|x86.Build.0 = Release|x86
+		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|x64.ActiveCfg = Release|Any CPU
+		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|x64.Build.0 = Release|Any CPU
+		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|x86.ActiveCfg = Release|Any CPU
+		{C32FCEEC-B603-472C-8B5C-BEA3E31F5A8A}.Release|x86.Build.0 = Release|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Debug|x64.Build.0 = Debug|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Debug|x86.Build.0 = Debug|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Release|x64.ActiveCfg = Release|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Release|x64.Build.0 = Release|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Release|x86.ActiveCfg = Release|Any CPU
+		{9425D69D-68D8-4773-934D-068488790118}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -110,7 +110,7 @@ namespace Boc
          throw new NotImplementedException();
       }
 
-      private Task<T> Parse<T>(Stream body)
+      private Task<T> Parse<T>(Object body)
       {
          throw new NotImplementedException();
       }
