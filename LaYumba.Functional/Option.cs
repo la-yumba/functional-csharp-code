@@ -9,8 +9,42 @@ namespace LaYumba.Functional
 
    public static partial class F
    {
-      public static Option<T> Some<T>(T value) => new Option.Some<T>(value); // wrap the given value into a Some
-      public static Option.None None => Option.None.Default;  // the None value
+      // The None value
+      public static Option.None None => Option.None.Default;
+
+      // Wraps the given value into a Some
+      public static Option<T> Some<T>(T value) => new Option.Some<T>(value);
+
+      // NOTE: in the book text, the Some function appears as:
+      //
+      // public static Option.Some<T> Some<T>(T value) => new Option.Some<T>(value);
+      //
+      // that is, it returns a Some, whereas in the implementation given here it returns an Option.
+      // The reason for the implementation as it appears in the book is that I want to emphasize
+      // that None and Some(T) are different types. Hence the Some function should construct a Some.
+      // So, on a theoretical level, this version is more consistent with the way I present
+      // my approach to modelling Option in a language that doesn't have "sum types".
+      //
+      // Naturally, according to the definition:
+      //
+      //   Option<T> = Some(T) | None
+      //
+      // both are (implicitly convertible to) an Option<T>.
+      //
+      // The implementation that appears here performs this conversion immediately,
+      // since when given a T you can create an Option<T> directly - unlike with None,
+      // where you don't yet know the type of T.
+      //
+      // This has the advantage that (among other things) you can write stuff like:
+      //
+      // public static Option<DateTime> Parse(string s)
+      //    => DateTime.TryParse(s, out DateTime d) ? Some(d) : None;
+      //
+      // If Some returns an Option, the above compiles (since None is convertible to Option).
+      // If Some returns a Some, the above fails (since C# cannot figure out that it should
+      // convert both the Some and the None to an Option), and you would have to add noise by
+      // explicitly converting one of the two values to Option.
+      // So, on a purely pragmatic level, the implementation given here is somewhat preferable.
    }
 
    public struct Option<T> : IEquatable<Option.None>, IEquatable<Option<T>>
@@ -41,8 +75,8 @@ namespace LaYumba.Functional
          if (isSome) yield return value;
       }
 
-      public bool Equals(Option<T> other) 
-         => this.isSome == other.isSome 
+      public bool Equals(Option<T> other)
+         => this.isSome == other.isSome
          && (this.isNone || this.value.Equals(other.value));
 
       public bool Equals(Option.None _) => isNone;
@@ -52,7 +86,7 @@ namespace LaYumba.Functional
 
       public override string ToString() => isSome ? $"Some({value})" : "None";
    }
-   
+
    namespace Option
    {
       public struct None
@@ -110,7 +144,7 @@ namespace LaYumba.Functional
          => None;
 
       public static Option<R> Map<T, R>
-         (this Option.Some<T> some, Func<T, R> f) 
+         (this Option.Some<T> some, Func<T, R> f)
          => Some(f(some.Value));
 
       public static Option<R> Map<T, R>
@@ -149,7 +183,7 @@ namespace LaYumba.Functional
             (t) => t);
 
       public static T GetOrElse<T>(this Option<T> opt, T defaultValue)
-         => opt.Match( 
+         => opt.Match(
             () => defaultValue,
             (t) => t);
 
@@ -164,19 +198,19 @@ namespace LaYumba.Functional
             (t) => Async(t));
 
       public static Option<T> OrElse<T>(this Option<T> left, Option<T> right)
-         => left.Match( 
+         => left.Match(
             () => right,
             (_) => left);
 
       public static Option<T> OrElse<T>(this Option<T> left, Func<Option<T>> right)
          => left.Match(
-            () => right(), 
+            () => right(),
             (_) => left);
 
 
       public static Validation<T> ToValidation<T>(this Option<T> opt, Func<Error> error)
          => opt.Match(
-            () => Invalid(error()), 
+            () => Invalid(error()),
             (t) => Valid(t));
 
       // LINQ
