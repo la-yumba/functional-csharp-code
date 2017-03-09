@@ -7,9 +7,6 @@ namespace LaYumba.Functional
    public static class Date
    {
       public static Option<DateTime> Parse(string s)
-      {
-         DateTime d;
-         return DateTime.TryParse(s, out d) ? Some(d) : None;
-      }
+         => DateTime.TryParse(s, out DateTime d) ? Some(d) : None;
    }
 }
