@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <PackageId>LaYumba.Functional</PackageId>
+    <PackageVersion>0.8.0</PackageVersion>
+    <Authors>Enrico Buonanno</Authors>
+    <Description>Functional C# library</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright 2017 (c) Enrico Buonanno. All rights reserved.</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
