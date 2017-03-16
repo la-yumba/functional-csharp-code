@@ -23,14 +23,14 @@ namespace Examples
             //    .Execute(args, new ExtendedTextWrapper(Console.Out), Console.In),
             ["HOFs"] = Chapter1.HOFs.Run,
             ["Greetings"] = Chapter7.Greetings.Run,
-            ["Timer"] = Chapter13.CreatingObservables.Timer.Run,
-            ["Subjects"] = Chapter13.CreatingObservables.Subjects.Run,
-            ["Create"] = Chapter13.CreatingObservables.Create.Run,
-            ["Generate"] = Chapter13.CreatingObservables.Generate.Run,
-            ["CurrencyLookup_Unsafe"] = Chapter13.CurrencyLookup_Unsafe.Run,
-            ["CurrencyLookup_Safe"] = Chapter13.CurrencyLookup_Safe.Run,
-            ["VoidContinuations"] = Chapter13.VoidContinuations.Run,
-            ["KeySequences"] = Chapter13.KeySequences.Run,
+            ["Timer"] = Chapter14.CreatingObservables.Timer.Run,
+            ["Subjects"] = Chapter14.CreatingObservables.Subjects.Run,
+            ["Create"] = Chapter14.CreatingObservables.Create.Run,
+            ["Generate"] = Chapter14.CreatingObservables.Generate.Run,
+            ["CurrencyLookup_Unsafe"] = Chapter14.CurrencyLookup_Unsafe.Run,
+            ["CurrencyLookup_Safe"] = Chapter14.CurrencyLookup_Safe.Run,
+            ["VoidContinuations"] = Chapter14.VoidContinuations.Run,
+            ["KeySequences"] = Chapter14.KeySequences.Run,
          };
 
          if (args.Length > 0)

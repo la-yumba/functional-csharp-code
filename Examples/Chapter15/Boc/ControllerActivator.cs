@@ -15,7 +15,7 @@ using Boc.Chapter10.Domain;
 using Unit = System.ValueTuple;
 using Boc.Domain.Events;
 
-namespace Boc.Chapter14
+namespace Boc.Chapter15
 {
    public class ControllerActivator : IControllerActivator
    {
