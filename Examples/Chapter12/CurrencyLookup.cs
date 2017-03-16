@@ -1,85 +1,134 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Collections.Immutable;
+using System.Net.Http;
 using static System.Console;
-using System.Threading.Tasks;
 using LaYumba.Functional;
+using static LaYumba.Functional.F;
 
-namespace Examples.Chapter12
+namespace StatefulComputations
 {
-   using Newtonsoft.Json.Linq;
-   using static F;
+   using Rates = ImmutableDictionary<string, decimal>;
 
    public class CurrencyLookup_Stateless
    {
       public static void _main()
       {
-         WriteLine("Enter a currency pair like 'EURUSD' to get a quote, or 'q' to quit");
+         WriteLine("Enter a currency pair like 'EURUSD', or 'q' to quit");
          for (string input; (input = ReadLine().ToUpper()) != "Q";)
-            WriteLine(FxApi.GetRate(input).Map(Decimal.ToString)
-               .Recover(ex => ex.Message).Result); // what to do in case of failure
+            WriteLine(FxApi.GetRate(input));
       }
    }
 
-   static class FxApi_1
+   public class CurrencyLookup
    {
-      public static async Task<decimal> GetRate(string ccyPair)
+      public static void _main()
       {
-         WriteLine($"fetching rate...");
-         var s = await new HttpClient().GetStringAsync(QueryFor(ccyPair));
-         return decimal.Parse(s.Trim());
+         WriteLine("Enter a currency pair like 'EURUSD', or 'q' to quit");
+         MainRec(Rates.Empty);
       }
 
-      static string QueryFor(string ccyPair)
-         => $"http://finance.yahoo.com/d/quotes.csv?f=l1&s={ccyPair}=X";
+      static void MainRec(Rates cache)
+      {
+         var input = ReadLine().ToUpper();
+         if (input == "Q") return;
+
+         var (rate, newState) = GetRate(input, cache);
+         WriteLine(rate);
+         MainRec(newState); // recursively calls itself with the new state
+      }
+
+      // non-recursive version
+      public static void MainNonRec()
+      {
+         WriteLine("Enter a currency pair like 'EURUSD', or 'q' to quit");
+         var state = Rates.Empty;
+
+         for (string input; (input = ReadLine().ToUpper()) != "Q";)
+         {
+            var (rate, newState) = GetRate(input, state);
+            state = newState;
+            WriteLine(rate);
+         }
+      }
+
+      static (decimal, Rates) GetRate(string ccyPair, Rates cache)
+      {
+         if (cache.ContainsKey(ccyPair))
+            return (cache[ccyPair], cache);
+
+         var rate = FxApi.GetRate(ccyPair);
+         return (rate, cache.Add(ccyPair, rate));
+      }
    }
 
-   static class FxApi_2
+   public class CurrencyLookup_MoreTestable
    {
-      public static Task<decimal> GetRate(string ccyPair) =>
-         from s in new HttpClient().GetStringAsync(QueryFor(ccyPair))
-         select decimal.Parse(s.Trim());
+      public static void _main()
+      {
+         WriteLine("Enter a currency pair like 'EURUSD', or 'q' to quit");
+         MainRec(Rates.Empty);
+      }
 
-      static string QueryFor(string ccyPair)
-         => $"http://finance.yahoo.com/d/quotes.csv?f=l1&s={ccyPair}=X";
+      static void MainRec(Rates cache)
+      {
+         var input = ReadLine().ToUpper();
+         if (input == "Q") return;
+
+         var (rate, newState) = GetRate(FxApi.GetRate, input, cache);
+         WriteLine(rate);
+         MainRec(newState); // recursively calls itself with the new state
+      }
+
+      static (decimal, Rates) GetRate
+         (Func<string, decimal> getRate, string ccyPair, Rates cache)
+      {
+         if (cache.ContainsKey(ccyPair))
+            return (cache[ccyPair], cache);
+
+         var rate = getRate(ccyPair);
+         return (rate, cache.Add(ccyPair, rate));
+      }
    }
 
+   public class CurrencyLookup_ErrorHandling
+   {
+      public static void _main()
+         => MainRec("Enter a currency pair like 'EURUSD', or 'q' to quit"
+            , Rates.Empty);
 
+      static void MainRec(string message, Rates cache)
+      {
+         WriteLine(message);
+         var input = ReadLine().ToUpper();
+         if (input == "Q") return;
+
+         GetRate(pair => () => FxApi.GetRate(pair), input, cache).Run().Match(
+            ex => MainRec($"Error: {ex.Message}", cache),
+            result => MainRec(result.Quote.ToString(), result.NewState));
+      }
+
+      static Try<(decimal Quote, Rates NewState)> GetRate
+        (Func<string, Try<decimal>> getRate, string ccyPair, Rates cache)
+      {
+         if (cache.ContainsKey(ccyPair))
+            return Try(() => (cache[ccyPair], cache));
+
+         else return from rate in getRate(ccyPair)
+            select (rate, cache.Add(ccyPair, rate));
+      }
+   }
 
    static class FxApi
    {
-      public static Task<decimal> GetRate(string ccyPair) =>
-         CurrencyLayer.GetRate(ccyPair)
-            .OrElse(() => Yahoo.GetRate(ccyPair));
-   }
-
-
-   public static class Yahoo
-   {
-      public static Task<decimal> GetRate(string ccyPair)
+      public static decimal GetRate(string ccyPair)
       {
-         WriteLine($"Fetching rate for {ccyPair} ...");
-         return from body in new HttpClient().GetStringAsync(QueryFor(ccyPair))
-                select decimal.Parse(body.Trim());
+         WriteLine($"fetching rate...");
+         var uri = $"http://finance.yahoo.com/d/quotes.csv?f=l1&s={ccyPair}=X";
+         var request = new HttpClient().GetStringAsync(uri);
+         return decimal.Parse(request.Result.Trim());
       }
 
-      static string QueryFor(string ccyPair)
-         => $"http://finance.yahoo.com/d/quotes.csv?f=l1&s={ccyPair}=X";
-   }
-
-
-   /// <summary>
-   /// Note that:
-   /// 1. you need to get an API key from https://currencylayer.com/ (free, registration required)
-   /// 2. the free plan only allows you to query rates with USD as base currency
-   /// </summary>
-   public static class CurrencyLayer
-   {
-      static string key = "4772f4e46027c9047c9a2f7444c95c60";
-
-      public static Task<decimal> GetRate(string ccyPair) =>
-         from body in new HttpClient().GetStringAsync(QueryFor(ccyPair))
-         select (decimal)JObject.Parse(body)["quotes"][ccyPair];
-
-      static string QueryFor(string pair)
-         => $"http://www.apilayer.net/api/live?access_key={key}";
+      public static Try<decimal> TryGetRate(string ccyPair)
+         => () => GetRate(ccyPair);
    }
 }
