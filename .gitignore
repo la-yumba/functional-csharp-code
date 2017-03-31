@@ -4,7 +4,6 @@
 *.lock.json
 
 *.nupkg
-!csc.2.0.0-beta5-60827-02.nupkg
 
 # in case VS tries to add it...
 .gitattributes
