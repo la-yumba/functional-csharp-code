@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using LaYumba.Functional;
 
-//using NUnit.Common;
-//using NUnit.Framework;
-//using NUnitLite;
 using System.Reflection;
 
 namespace Examples
@@ -19,8 +16,6 @@ namespace Examples
       {
          var cliExamples = new Dictionary<string, Action>
          {
-            //["test"] = () => new AutoRun(typeof(Program).GetTypeInfo().Assembly)
-            //    .Execute(args, new ExtendedTextWrapper(Console.Out), Console.In),
             ["HOFs"] = Chapter1.HOFs.Run,
             ["Greetings"] = Chapter7.Greetings.Run,
             ["Timer"] = Chapter14.CreatingObservables.Timer.Run,
@@ -46,11 +41,11 @@ namespace Examples
       static void StartWebApi()
       { 
          var host = new WebHostBuilder()
-             .UseKestrel()
-             .UseContentRoot(Directory.GetCurrentDirectory())
-             .UseIISIntegration()
-             .UseStartup<Boc.Startup>()
-             .Build();
+            .UseKestrel()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseIISIntegration()
+            .UseStartup<Boc.Startup>()
+            .Build();
 
          host.Run();
       }

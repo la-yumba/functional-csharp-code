@@ -25,11 +25,17 @@ namespace Examples.Chapter11
          from uri in Try(() => new Uri(uriStr))
          select uri;
 
-      [TestCase(@"{'Uri': 'http://github.com'}", ExpectedResult = "Ok")]
-      [TestCase("{'Uri': 'rubbish'}", ExpectedResult = "Invalid URI: The format of the URI could not be determined.")]
-      [TestCase("{}", ExpectedResult = "Value cannot be null.\r\nParameter name: uriString")]
-      [TestCase("blah!", ExpectedResult = "Unexpected character encountered while parsing value: b. Path '', line 0, position 0.")]
-      public string SuccessfulTry(string json)
-         => ExtractUri(json).Run().Match(ex => ex.Message, _ => "Ok");
+      [TestCase(@"{'Uri': 'http://github.com'}", "Ok")]
+      [TestCase("{'Uri': 'rubbish'}", "Invalid URI")]
+      [TestCase("{}", "Value cannot be null")]
+      [TestCase("blah!", "Unexpected character encountered")]
+      public void SuccessfulTry(string json, string expected)
+         => Assert.IsTrue(
+            ExtractUri(json)
+               .Run()
+               .Match(
+                  ex => ex.Message, 
+                  _ => "Ok")
+               .StartsWith(expected));
    }
 }

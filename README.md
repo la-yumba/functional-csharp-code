@@ -17,16 +17,15 @@ The code samples are organized in the following projects:
   useful to better understand the constructs in the library
 - **Boc.Domain**: an example of using F# for domain objects
 
-**Note:** you are welcome to use `LaYumba.Functional` in your projects, and submit
+**Note:** you are welcome to reference `LaYumba.Functional` from your projects 
+via [NuGet](https://www.nuget.org/packages/LaYumba.Functional), and submit
 PRs with improvements, but the main intent of this library is pedagogical. 
 For a more fully-fledged functional library, consider [LanguageExt](https://github.com/louthy/language-ext)
 
 ## Working with the code samples
 
-*Important*: The code samples use .NET Standard 1.6 and .NET Core 1.1, and should compile and run on all major OS's
-via the `dotnet` CLI. .NET Core still has rough edges, so you may experience issues
-(with test runners, IDEs, REPLs); if you have suggestions on how to mitigate these, 
-submit a PR or let me know via [the book forum](https://forums.manning.com/forums/functional-programming-in-c-sharp).
+The code samples use .NET Standard 1.6 and .NET Core 1.1, and should compile and run on all major OS's
+via the `dotnet` CLI.
 
 ### Prerequisites
 
@@ -44,10 +43,14 @@ $ dotnet restore
 
 ### Running the tests
 
+Use the `dotnet test` command, for example:
+
 ```
 $ cd LaYumba.Functional.Tests
 $ dotnet test
 ```
+
+tests in the `Exercises` and `Examples` projects can be run in the same way.
 
 ### Running examples
 
@@ -56,7 +59,7 @@ The pattern is:
 
 ```
 $ cd Examples
-$ dotnet run HOFs
+$ dotnet run Greetings
 ```
 
 | Section | Command 
@@ -69,7 +72,7 @@ Throughout the book, I encourage readers to try things out in the [REPL](https:/
 
 - If you use Visual Studio, you can start the REPL by going to
 `View > Other Windows > C# Interactive` (short tutorial [here](https://github.com/dotnet/roslyn/wiki/C%23-Interactive-Walkthrough))
-- On Mono, you can use the `csharp` command
+- On Mono, use the `csharp` command
 - There are several other REPLs available, some even run in the browser
 
 You'll often need to import `LaYumba.Functional` in the REPL. In C# Interactive, 

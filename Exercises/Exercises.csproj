@@ -3,11 +3,16 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <StartupObject>Exercises.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.6.1" />
     <PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
+
+    <packagereference Include="Microsoft.NET.Test.Sdk" Version="15.0.0"></packagereference>
+    <packagereference Include="NUnit" Version="3.6.1"></packagereference>
+    <packagereference Include="NUnit3TestAdapter" Version="3.8.0-alpha1"></packagereference>
+
     <ProjectReference Include="..\Examples\Examples.csproj" />
     <ProjectReference Include="..\LaYumba.Functional.Data\LaYumba.Functional.Data.csproj" />
     <ProjectReference Include="..\LaYumba.Functional\LaYumba.Functional.csproj" />
