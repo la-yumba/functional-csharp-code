@@ -191,10 +191,10 @@ namespace LaYumba.Functional
             (t) => predicate(t) ? optT : None);
 
       public static Option<RR> SelectMany<T, R, RR>
-         (this Option<T> @this, Func<T, Option<R>> bind, Func<T, R, RR> project)
-         => @this.Match(
+         (this Option<T> opt, Func<T, Option<R>> bind, Func<T, R, RR> project)
+         => opt.Match(
             () => None,
-            (t) => @this.Bind(bind).Match(
+            (t) => bind(t).Match(
                () => None,
                (r) => Some(project(t, r))));
    }
