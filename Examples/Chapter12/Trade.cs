@@ -42,7 +42,7 @@ namespace StatefulComputations
       public Bid Bid { get; set; }
       public IEnumerable<Offer> Offers { get; set; }
 
-      public static implicit operator State(ValueTuple<Bid, IEnumerable<Offer>> t)
+      public static implicit operator State((Bid, IEnumerable<Offer>) t)
          => new State
          {
             Bid = t.Item1,

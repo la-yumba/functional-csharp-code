@@ -14,7 +14,7 @@ namespace LaYumba.Functional
 
    public class Pattern<R> : IEnumerable
    {
-      IList<ValueTuple<Type, Func<object, R>>> funcs = new List<ValueTuple<Type, Func<object, R>>>();
+      IList<(Type, Func<object, R>)> funcs = new List<(Type, Func<object, R>)>();
 
       IEnumerator IEnumerable.GetEnumerator() => funcs.GetEnumerator();
 
@@ -48,7 +48,7 @@ namespace LaYumba.Functional
          return matchingDel(value);
       }
 
-      static Func<ValueTuple<Type, Func<object, R>>, bool> InputArgMatchesTypeOf(object value)
+      static Func<(Type, Func<object, R>), bool> InputArgMatchesTypeOf(object value)
          => tup => tup.Item1.GetTypeInfo().IsAssignableFrom(value.GetType());
    }
 }

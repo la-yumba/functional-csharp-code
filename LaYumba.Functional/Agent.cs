@@ -28,12 +28,12 @@ namespace LaYumba.Functional
 
       public static Agent<Msg, Reply> Start<State, Msg, Reply>
          (State initialState
-         , Func<State, Msg, ValueTuple<State, Reply>> process)
+         , Func<State, Msg, (State, Reply)> process)
          => new TwoWayAgent<State, Msg, Reply>(initialState, process);
 
       public static Agent<Msg, Reply> Start<State, Msg, Reply>
          (State initialState
-         , Func<State, Msg, Task<ValueTuple<State, Reply>>> process)
+         , Func<State, Msg, Task<(State, Reply)>> process)
          => new TwoWayAgent<State, Msg, Reply>(initialState, process);
    }
 
@@ -93,13 +93,13 @@ namespace LaYumba.Functional
    class TwoWayAgent<State, Msg, Reply> : Agent<Msg, Reply>
    {
       private State state;
-      private readonly ActionBlock<ValueTuple<Msg, TaskCompletionSource<Reply>>> actionBlock;
+      private readonly ActionBlock<(Msg, TaskCompletionSource<Reply>)> actionBlock;
 
-      public TwoWayAgent(State initialState, Func<State, Msg, ValueTuple<State, Reply>> process)
+      public TwoWayAgent(State initialState, Func<State, Msg, (State, Reply)> process)
       {
          state = initialState;
 
-         actionBlock = new ActionBlock<ValueTuple<Msg, TaskCompletionSource<Reply>>>(
+         actionBlock = new ActionBlock<(Msg, TaskCompletionSource<Reply>)>(
             t =>
             {
                var result = process(state, t.Item1);
@@ -109,11 +109,11 @@ namespace LaYumba.Functional
       }
 
       // creates a 2-way agent with an async processing func
-      public TwoWayAgent(State initialState, Func<State, Msg, Task<ValueTuple<State, Reply>>> process)
+      public TwoWayAgent(State initialState, Func<State, Msg, Task<(State, Reply)>> process)
       {
          state = initialState;
 
-         actionBlock = new ActionBlock<ValueTuple<Msg, TaskCompletionSource<Reply>>>(
+         actionBlock = new ActionBlock<(Msg, TaskCompletionSource<Reply>)>(
             async t => await process(state, t.Item1)
                .ContinueWith(task =>
                {

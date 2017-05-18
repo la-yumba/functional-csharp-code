@@ -5,7 +5,7 @@ using System;
 
 namespace Boc.Chapter10
 {
-   public delegate Validation<ValueTuple<T, St>> Transition<St, T>(St state);
+   public delegate Validation<(T, St)> Transition<St, T>(St state);
 
    public static class Transition
    {
@@ -21,10 +21,6 @@ namespace Boc.Chapter10
          => transition(state0)
             .Bind(t => f(t.Item1)(t.Item2));
 
-         //   var(t, state1) = StatefulComputation(state0);
-         //   return f(t)(state1);
-         //};
-
       public static Transition<St, RR> SelectMany<St, T, R, RR>
          (this Transition<St, T> transition
          , Func<T, Transition<St, R>> bind
@@ -33,10 +29,5 @@ namespace Boc.Chapter10
          => transition(state0)
             .Bind(t => bind(t.Item1)(t.Item2)
                .Map(r => (project(t.Item1, r.Item1), r.Item2)));
-         
-      //   var(r, state2) = bind(t)(state1);
-         //   var rr = project(t, r);
-         //   return (rr, state2);
-         //};
    }
 }

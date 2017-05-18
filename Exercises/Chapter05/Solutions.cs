@@ -49,16 +49,16 @@ namespace Exercises.Chapter5.Solutions
          return string.Join(" ", comments.ToArray());
       }
 
-      // note that here I use Tuple instead of KeyValuePair, but that's a minor detail
-      static IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> Switch<T, R>()
-         => Enumerable.Empty<ValueTuple<Predicate<T>, Func<T, R>>>();
+      // note that here I use a tuple instead of KeyValuePair, but that's a minor detail
+      static IEnumerable<(Predicate<T>, Func<T, R>)> Switch<T, R>()
+         => Enumerable.Empty<(Predicate<T>, Func<T, R>)>();
       
-      static IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> Case<T, R>(
-         this IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> rules
+      static IEnumerable<(Predicate<T>, Func<T, R>)> Case<T, R>(
+         this IEnumerable<(Predicate<T>, Func<T, R>)> rules
          , Predicate<T> pred, Func<T, R> func)
             => rules.Append((pred, func));
 
-      static IEnumerable<R> MatchAll<T, R>(this IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> rules, T t)
+      static IEnumerable<R> MatchAll<T, R>(this IEnumerable<(Predicate<T>, Func<T, R>)> rules, T t)
             => rules.Where(rule => rule.Item1(t))
                .Map(rule => rule.Item2(t));
       
@@ -75,12 +75,12 @@ namespace Exercises.Chapter5.Solutions
       // method that returns the result of invoking the function of the _first_
       // matching case.
 
-      static IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> Case<T, R>(
-         this IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> rules
+      static IEnumerable<(Predicate<T>, Func<T, R>)> Case<T, R>(
+         this IEnumerable<(Predicate<T>, Func<T, R>)> rules
          , T value, Func<T, R> func)
             => rules.Append((new Predicate<T>(v => v.Equals(value)), func));
 
-      static R Match<T, R>(this IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> rules, T t)
+      static R Match<T, R>(this IEnumerable<(Predicate<T>, Func<T, R>)> rules, T t)
          => rules.Where(rule => rule.Item1(t))
             .First().Item2(t);
 

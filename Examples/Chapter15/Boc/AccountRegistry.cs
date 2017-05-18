@@ -57,7 +57,7 @@ namespace Boc.Chapter15
          this.loadAccount = loadAccount;
 
          this.agent = Agent.Start(AccountsCache.Empty, (AccountsCache cache, Msg msg) =>
-            new Pattern<ValueTuple<AccountsCache, Option<AccountProcess>>>
+            new Pattern<(AccountsCache, Option<AccountProcess>)>
             {
                (LookupMsg m) => (cache, cache.Lookup(m.Id)),
 
