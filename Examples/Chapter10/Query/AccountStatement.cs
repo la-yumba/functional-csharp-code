@@ -17,7 +17,7 @@ namespace Boc.Chapter10.Query
       public Transaction(DebitedTransfer e)
       {
          this.DebitedAmount = e.DebitedAmount;
-         Description = $"Transer to {e.Bic}/{e.Iban}; Ref: {e.Reference}";
+         Description = $"Transfer to {e.Bic}/{e.Iban}; Ref: {e.Reference}";
          Date = e.Timestamp.Date;
       }
 
