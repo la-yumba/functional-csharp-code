@@ -25,7 +25,7 @@ namespace Boc.Chapter10.Domain
          var evt = cmd.ToEvent();
          var newState = @this.Apply(evt);
 
-         return Tuple(evt as Event, newState);
+         return (evt as Event, newState);
       }
 
       public static Validation<(Event Event, AccountState NewState)> Freeze
@@ -37,7 +37,7 @@ namespace Boc.Chapter10.Domain
          var evt = cmd.ToEvent();
          var newState = @this.Apply(evt);
 
-         return Tuple(evt as Event, newState);
+         return (evt as Event, newState);
       }
 
       // apply events

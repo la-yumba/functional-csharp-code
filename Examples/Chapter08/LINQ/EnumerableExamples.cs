@@ -39,16 +39,16 @@ namespace Examples.Chapter8.Linq
          var a =
             from c in Range('a', 'c')
             from i in Range(2, 3)
-            select Tuple(c, i);
+            select (c, i);
 
          var b =
             Range('a', 'c')
                .SelectMany(c => Range(2, 3)
-                  .Select(i => Tuple(c, i)));
+                  .Select(i => (c, i)));
 
          var d = Range('a', 'c')
             .SelectMany(c => Range(2, 3)
-               , (c, i) => Tuple(c, i));
+               , (c, i) => (c, i));
 
 
 

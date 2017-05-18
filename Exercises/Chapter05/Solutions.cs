@@ -56,7 +56,7 @@ namespace Exercises.Chapter5.Solutions
       static IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> Case<T, R>(
          this IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> rules
          , Predicate<T> pred, Func<T, R> func)
-            => rules.Append(Tuple(pred, func));
+            => rules.Append((pred, func));
 
       static IEnumerable<R> MatchAll<T, R>(this IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> rules, T t)
             => rules.Where(rule => rule.Item1(t))
@@ -78,7 +78,7 @@ namespace Exercises.Chapter5.Solutions
       static IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> Case<T, R>(
          this IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> rules
          , T value, Func<T, R> func)
-            => rules.Append(Tuple(new Predicate<T>(v => v.Equals(value)), func));
+            => rules.Append((new Predicate<T>(v => v.Equals(value)), func));
 
       static R Match<T, R>(this IEnumerable<ValueTuple<Predicate<T>, Func<T, R>>> rules, T t)
          => rules.Where(rule => rule.Item1(t))

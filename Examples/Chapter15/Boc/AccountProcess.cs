@@ -30,7 +30,7 @@ namespace Boc.Chapter15
                await result.Traverse(tpl => saveAndPublish(tpl.Event)); // persist within block, so that the agent doesn't process new messages in a non-persisted state
 
                var newState = result.Map(tpl => tpl.NewState).GetOrElse(state);
-               return Tuple(newState, result);
+               return (newState, result);
             });
       }
 

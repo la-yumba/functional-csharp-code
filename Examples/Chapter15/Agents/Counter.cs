@@ -16,7 +16,7 @@ namespace Examples.Agents
          {
             var newState = state + msg;
             PrintThreadOf("Counter");
-            return Tuple(newState, newState);
+            return (newState, newState);
          });
 
       // public interface of the Counter

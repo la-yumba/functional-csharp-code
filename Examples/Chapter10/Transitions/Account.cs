@@ -18,7 +18,7 @@ namespace Boc.Chapter10.Transitions
       {
          var evt = cmd.ToEvent();
          var newState = evt.ToAccount();
-         return Tuple(evt, newState);
+         return (evt, newState);
       };
 
 
@@ -32,7 +32,7 @@ namespace Boc.Chapter10.Transitions
          var evt = cmd.ToEvent();
          var newState = account.Apply(evt);
 
-         return Tuple(evt, newState);
+         return (evt, newState);
       };
 
       public static Transition<AccountState, AlteredOverdraft> 
@@ -42,7 +42,7 @@ namespace Boc.Chapter10.Transitions
          var evt = cmd.ToEvent(cmd.Amount - account.AllowedOverdraft);
          var newState = account.Apply(evt);
 
-         return Tuple(evt, newState);
+         return (evt, newState);
       };
 
       public static Validation<FrozeAccount> Freeze

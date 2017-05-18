@@ -128,14 +128,14 @@ namespace Examples.Chapter14
          //      if (tpl.Item1.ContainsKey(pair))
          //      {
          //         WriteLine("reusing cached value");
-         //         return Tuple(tpl.Item1, tpl.Item1[pair].ToString());
+         //         return (tpl.Item1, tpl.Item1[pair].ToString());
          //      }
          //      else
          //      {
          //         WriteLine("fetching remotely...");
          //         return Yahoo.GetRate(pair)
-         //            .Map(rate => Tuple(tpl.Item1.Add(pair, rate), rate.ToString()))
-         //            .Recover(ex => Tuple(tpl.Item1, ex.Message))
+         //            .Map(rate => (tpl.Item1.Add(pair, rate), rate.ToString()))
+         //            .Recover(ex => (tpl.Item1, ex.Message))
          //            .Result;
          //      }
          //   });

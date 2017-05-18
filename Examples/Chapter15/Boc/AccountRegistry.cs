@@ -23,16 +23,16 @@ namespace Boc.Chapter15
             {
                AccountProcess account;
                if (cache.TryGetValue(id, out account))
-                  return Tuple(cache, Some(account));
+                  return (cache, Some(account));
 
                var optAccount = await loadAccount(id);
 
                return optAccount.Map(accState =>
                {
                   var process = new AccountProcess(accState, saveAndPublish);
-                  return Tuple(cache.Add(id, process), Some(process));
+                  return (cache.Add(id, process), Some(process));
                })
-               .GetOrElse(() => Tuple(cache, (Option<AccountProcess>)None));
+               .GetOrElse(() => (cache, (Option<AccountProcess>)None));
             });
       }
 
@@ -59,14 +59,14 @@ namespace Boc.Chapter15
          this.agent = Agent.Start(AccountsCache.Empty, (AccountsCache cache, Msg msg) =>
             new Pattern<ValueTuple<AccountsCache, Option<AccountProcess>>>
             {
-               (LookupMsg m) => Tuple(cache, cache.Lookup(m.Id)),
+               (LookupMsg m) => (cache, cache.Lookup(m.Id)),
 
                (RegisterMsg m) => cache.Lookup(m.Id).Match(
-                  Some: acc => Tuple(cache, Some(acc)),
+                  Some: acc => (cache, Some(acc)),
                   None: () =>
                   {
                      var account = new AccountProcess(m.AccountState, saveAndPublish);
-                     return Tuple(cache.Add(m.Id, account), Some(account));
+                     return (cache.Add(m.Id, account), Some(account));
                   })
             }
             .Match(msg));

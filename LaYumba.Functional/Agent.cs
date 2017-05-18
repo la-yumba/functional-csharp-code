@@ -130,7 +130,7 @@ namespace LaYumba.Functional
       public Task<Reply> Tell(Msg message)
       {
          var tcs = new TaskCompletionSource<Reply>();
-         actionBlock.Post(Tuple(message, tcs));
+         actionBlock.Post((message, tcs));
          return tcs.Task;
       }
    }

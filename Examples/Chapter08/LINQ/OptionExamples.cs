@@ -140,12 +140,12 @@ namespace Examples.Chapter8.Linq
          var a =
             from c in Range('a', 'c')
             from i in Range(1, 2)
-            select Tuple(c, i);
+            select (c, i);
 
          var b =
             Range('a', 'c')
                .SelectMany(c => Range(1, 2)
-                  .Select(i => Tuple(c, i)));
+                  .Select(i => (c, i)));
 
          a.ForEach(t => WriteLine($"({t.Item1}, {t.Item2})"));
          WriteLine();

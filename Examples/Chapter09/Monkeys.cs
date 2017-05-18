@@ -48,6 +48,30 @@ namespace Examples.Chapter10.Data
          throw new InvalidOperationException("Unknown reward");
       }
 
+      string DescribeWithIs(Reward reward)
+      {
+         if (reward is Banana banana)
+            return $"It's a {banana.Ripeness} banana";
+
+         else if (reward is Peanut _)
+            return "It's a peanut";
+
+         return "It's a reward I don't know or care about";
+      }
+
+      string DescribeWithSwitch(Reward reward)
+      {
+         switch (reward)
+         {
+            case Banana banana:
+               return $"It's a {banana.Ripeness} banana";
+            case Peanut _:
+               return "It's a peanut";
+            default:
+               return "It's a reward I don't know or care about";
+         }
+      }
+
       string DescribeChoiceOf(Reward reward)
          => reward.Match(
             Peanut: () => "It's a peanut",

@@ -19,7 +19,7 @@ namespace LaYumba.Functional
       IEnumerator IEnumerable.GetEnumerator() => funcs.GetEnumerator();
 
       public void Add<T>(Func<T, R> func) 
-         => funcs.Add(Tuple<Type, Func<object, R>>(typeof(T), o => func((T)o)));
+         => funcs.Add((typeof(T), o => func((T)o)));
 
       public Pattern<R> Default(Func<R> func)
       {

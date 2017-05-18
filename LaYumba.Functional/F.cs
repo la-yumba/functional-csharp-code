@@ -34,12 +34,6 @@ namespace LaYumba.Functional
 
       // DATA STRUCTURES
 
-      public static ValueTuple<T1, T2> Tuple<T1, T2>(T1 t1, T2 t2) => new ValueTuple<T1, T2>(t1, t2);
-
-      public static ValueTuple<T1, T2, T3> Tuple<T1, T2, T3>(T1 t1, T2 t2, T3 t3) => new ValueTuple<T1, T2, T3>(t1, t2, t3);
-
-      public static ValueTuple<T1, T2, T3, T4> Tuple<T1, T2, T3, T4>(T1 t1, T2 t2, T3 t3, T4 t4) => new ValueTuple<T1, T2, T3, T4>(t1, t2, t3, t4);
-
       public static KeyValuePair<K, T> Pair<K, T>(K key, T value)
          => new KeyValuePair<K, T>(key, value);
 
