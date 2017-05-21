@@ -5,6 +5,9 @@ using LaYumba.Functional;
 using LaYumba.Functional.Data.LinkedList;
 using static LaYumba.Functional.Data.LinkedList.LinkedList;
 
+using LaYumba.Functional.Data.BinaryTree;
+using static LaYumba.Functional.Data.BinaryTree.Tree;
+
 namespace Exercises.Chapter9.Solutions
 {
    static class Solutions
@@ -54,6 +57,16 @@ namespace Exercises.Chapter9.Solutions
       // that take an IEnumerable rather than a List
       
       // Answer: see LaYumba.Functional.EnumerableExt
+
+
+      // Is it possible to define `Bind` for the binary tree implementation shown in this
+      // chapter? If so, implement `Bind`:
+
+      static Tree<R> Bind<T, R>(this Tree<T> tree, Func<T, Tree<R>> f)
+         => tree.Match(
+               Leaf: f,
+               Branch: (l, r) => Branch(l.Bind(f), r.Bind(f))
+            );
 
    }
 
