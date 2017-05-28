@@ -12,7 +12,7 @@ namespace Boc.Chapter7
    {
       // runs all validators, accumulating all validation errors
       public static Validator<T> HarvestErrorsTr<T>
-         (IEnumerable<Validator<T>> validators)
+         (params Validator<T>[] validators)
          => t
          => validators
             .Traverse(validate => validate(t))
@@ -21,29 +21,46 @@ namespace Boc.Chapter7
    
    public static partial class ValidationStrategiesTest
    {
+      static Validator<string> ShouldBeLowerCase 
+         => s 
+         => (s == s.ToLower()) ? Valid(s) : Error($"{s} should be lower case");
+
+      static Validator<string> ShouldBeOfLength(int n)
+         => s 
+         => (s.Length == n) ? Valid(s) : Error($"{s} should be of length {n}");
+
+      static Validator<string> ValidateCountryCode
+         = HarvestErrorsTr(ShouldBeLowerCase, ShouldBeOfLength(2));
+
+      [TestCase("us", ExpectedResult = "Valid(us)")]
+      [TestCase("US", ExpectedResult = "Invalid([US should be lower case])")]
+      [TestCase("USA", ExpectedResult = "Invalid([USA should be lower case, USA should be of length 2])")]
+      public static string TestCountryCodeValidation(string s)
+         => ValidateCountryCode(s).ToString();
+
       public class HarvestErrors_WithTraverse_Test
       {
          [Test]
          public void WhenAllValidatorsSucceed_ThenSucceed() => Assert.AreEqual(
-            actual: HarvestErrorsTr(List(Success, Success))(1),
+            actual: HarvestErrorsTr(Success, Success)(1),
             expected: Valid(1)
          );
 
          [Test]
          public void WhenNoValidators_ThenSucceed() => Assert.AreEqual(
-            actual: HarvestErrorsTr(List<Validator<int>>())(1),
+            actual: HarvestErrorsTr<int>()(1),
             expected: Valid(1)
          );
 
          [Test]
          public void WhenOneValidatorFails_ThenFail() =>
-            HarvestErrorsTr(List(Success, Failure))(1).Match(
+            HarvestErrorsTr(Success, Failure)(1).Match(
                Valid: (_) => Assert.Fail(),
                Invalid: (errs) => Assert.AreEqual(1, errs.Count()));
 
          [Test]
          public void WhenSeveralValidatorsFail_ThenFail() =>
-            HarvestErrorsTr(List(Success, Failure, Failure, Success))(1).Match(
+            HarvestErrorsTr(Success, Failure, Failure, Success)(1).Match(
                Valid: (_) => Assert.Fail(),
                Invalid: (errs) => Assert.AreEqual(2, errs.Count())); // all errors are returned
       }
