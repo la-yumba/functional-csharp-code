@@ -28,7 +28,7 @@ namespace Boc.Chapter15
             from cmd in Async(Validate(command))
             from acc in GetAccount(cmd.DebitedAccountId)
             from result in acc.Handle(cmd)
-            select result.Item2;
+            select result.NewState;
 
          return outcome.Map(
             Faulted: ex => StatusCode(500, Errors.UnexpectedError),
