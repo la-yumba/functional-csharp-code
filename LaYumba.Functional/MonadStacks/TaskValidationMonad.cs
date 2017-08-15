@@ -58,5 +58,26 @@ namespace LaYumba.Functional
             .Map(vt => vt.TraverseBind(t => bind(t).Map(vr => vr.Map(r => project(t, r)))))
             .Unwrap()
             .Stack();
+
+      // this overload causes interpretation of the LINQ query to break
+      // it can't decide between `Func<T, Task<R>>` and `Func<T, Task<Validation<R>>`
+      // public static TaskValidation<RR> SelectMany<T, R, RR>
+      //    (this TaskValidation<T> tv       // Task<Validation<T>> 
+      //    , Func<T, Task<R>> bind  // -> (T -> Task<R>)
+      //    , Func<T, R, RR> project)
+      //    => tv
+      //       .Value
+      //       .Map(vt => vt.Traverse(t => bind(t).Map(r => project(t, r))))
+      //       .Unwrap()
+      //       .Stack();
+
+      public static TaskValidation<RR> SelectMany<T, R, RR>
+         (this TaskValidation<T> tv       // Task<Validation<T>> 
+         , Func<T, Validation<R>> bind  // -> (T -> Validation<R>)
+         , Func<T, R, RR> project)
+         => tv
+            .Value
+            .Map(vt => vt.Bind(t => bind(t).Map(r => project(t, r))))
+            .Stack();
    }
 }

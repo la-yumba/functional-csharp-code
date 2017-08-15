@@ -50,5 +50,21 @@ namespace Boc.Chapter10.Services
                Invalid: errs => BadRequest(new { Errors = errs }),
                Valid: newState => Ok(new { Balance = newState.Balance }) as IActionResult));
       }
+
+      public Task<IActionResult> Transfer_Alternative([FromBody] MakeTransfer command)
+      {
+         Task<Validation<AccountState>> outcome =
+            from cmd in Async(validate(command)).Stack()
+            from acc in GetAccount(cmd.DebitedAccountId)
+            from result in Account.Debit(acc, cmd)
+            from _ in SaveAndPublish(result.Item1).Map(Valid)
+            select result.Item2;
+
+         return outcome.Map(
+            Faulted: ex => StatusCode(500, Errors.UnexpectedError),
+            Completed: val => val.Match(
+               Invalid: errs => BadRequest(new { Errors = errs }),
+               Valid: newState => Ok(new { Balance = newState.Balance }) as IActionResult));
+      }
    }   
 }
