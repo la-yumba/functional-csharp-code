@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 //using System.Configuration;
 using LaYumba.Functional;
+using static LaYumba.Functional.F;
+using System.Text.RegularExpressions;
 
 namespace Exercises.Chapter3
 {
@@ -10,51 +12,81 @@ namespace Exercises.Chapter3
 
    public static class Solutions
    {
-      // 1.  Write an overload of `GetOrElse`, that returns the wrapped value, or
-      // calls a given function to compute an alternative default.
-      static T GetOrElse<T>(this Option<T> @this, Func<T> func)
-         => @this.Match(
-            Some: t => t,
-            None: func);
+      // 1 Write a generic function that takes a string and parses it as a value of an enum. It
+      // should be usable as follows:
 
-      // What is the benefit of this overload over the implementation we've seen above?
-      // 'func' is not evalueated unless necessary, resulting in a performance benefit
-      // if 'func' is expensive
+      // Enum.Parse<DayOfWeek>("Friday") // => Some(DayOfWeek.Friday)
+      // Enum.Parse<DayOfWeek>("Freeday") // => None
 
-      // 2.  Write `Option.Map` in terms of `Match`.
-      static Option<R> Map_Alt<T, R>(this Option<T> @this, Func<T, R> func)
-          => @this.Match(
-              Some: value => F.Some(func(value)),
-              None: () => F.None);
+      // solution: see LaYumba.Functional.Enum.Parse<T>
 
-      // 3.  Write an extension method `Lookup` on `IDictionary<K, T>`, that
-      // takes a `K` and returns an `Option<T>`.
-      static Option<T> Lookup<K, T>(this IDictionary<K, T> map, K key)
-         => map.ContainsKey(key) ? Some(map[key]) : None;
 
-      // 4.  Write an extension method `Map` on `IDictionary<K, T>`, that takes a
-      // `Func<T, R>` and returns a new `Dictionary<K, R>`, mapping the original
-      // keys to the values resulting from applying the function to the values.
-      // TODO
-   }
+      // 2 Write a Lookup function that will take an IEnumerable and a predicate, and
+      // return the first element in the IEnumerable that matches the predicate, or None
+      // if no matching element is found. Write its signature in arrow notation:
 
-   public class AppConfig_Solution
-   {
-      NameValueCollection source;
+      // bool isOdd(int i) => i % 2 == 1;
+      // new List<int>().Lookup(isOdd) // => None
+      // new List<int> { 1 }.Lookup(isOdd) // => Some(1)
 
-      //public AppConfig_Solution() : this(ConfigurationManager.AppSettings) { }
-
-      public AppConfig_Solution(NameValueCollection source)
+      // Lookup : IEnumerable<T> -> (T -> bool) -> Option<T>
+      public static Option<T> Lookup<T>(this IEnumerable<T> ts, Func<T, bool> pred)
       {
-         this.source = source;
+         foreach (T t in ts) if (pred(t)) return Some(t);
+         return None;
       }
 
-      public Option<T> Get<T>(string key)
-         => Some((T)Convert.ChangeType(source[key], typeof(T)));
+      // 3 Write a type Email that wraps an underlying string, enforcing that it’s in a valid
+      // format. Ensure that you include the following:
+      // - A smart constructor
+      // - Implicit conversion to string, so that it can easily be used with the typical API
+      // for sending emails
 
-      public T Get<T>(string key, T defaultValue)
-         => Get<T>(key).Match(
-            Some: value => value,
-            None: () => defaultValue);
+      public class Email
+      {
+         static readonly Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+
+         private string Value { get; }
+
+         private Email(string value) => Value = value;
+
+         public static Option<Email> Create(string s)
+            => regex.IsMatch(s) 
+               ? Some(new Email(s)) 
+               : None;
+
+         public static implicit operator string(Email e)
+            => e.Value;
+      }
+      
+      // 4 Take a look at the extension methods defined on IEnumerable inSystem.LINQ.Enumerable.
+      // Which ones could potentially return nothing, or throw some
+      // kind of not-found exception, and would therefore be good candidates for
+      // returning an Option<T> instead?
+
+      // 5.  Write implementations for the methods in the `AppConfig` class
+      // below. (For both methods, a reasonable one-line method body is possible.
+      // Assume settings are of type string, numeric or date.) Can this
+      // implementation help you to test code that relies on settings in a
+      // `.config` file?
+      public class AppConfig
+      {
+         NameValueCollection source;
+
+         //public AppConfig() : this(ConfigurationManager.AppSettings) { }
+
+         public AppConfig(NameValueCollection source)
+         {
+            this.source = source;
+         }
+
+         public Option<T> Get<T>(string key)
+            => Some((T)Convert.ChangeType(source[key], typeof(T)));
+
+         public T Get<T>(string key, T defaultValue)
+            => Get<T>(key).Match(
+               Some: value => value,
+               None: () => defaultValue);
+      }
    }
 }

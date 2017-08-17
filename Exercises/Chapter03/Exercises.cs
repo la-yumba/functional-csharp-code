@@ -5,29 +5,41 @@ using LaYumba.Functional;
 
 namespace Exercises.Chapter3
 {
-    public static class Exercises
-    {
-        // 1.  Write an overload of `GetOrElse`, that returns the wrapped value, or
-        // calls a given function to compute an alternative default. What is the
-        // benefit of this overload over the implementation we've seen above?
+   public static class Exercises
+   {
+      // 1 Write a generic function that takes a string and parses it as a value of an enum. It
+      // should be usable as follows:
 
-        // 2.  Write `Option.Map` in terms of `Match`.
+      // Enum.Parse<DayOfWeek>("Friday") // => Some(DayOfWeek.Friday)
+      // Enum.Parse<DayOfWeek>("Freeday") // => None
 
-        // 3.  Write an extension method `Lookup` on `IDictionary<K, T>`, that
-        // takes a `K` and returns an `Option<T>`.
+      // 2 Write a Lookup function that will take an IEnumerable and a predicate, and
+      // return the first element in the IEnumerable that matches the predicate, or None
+      // if no matching element is found. Write its signature in arrow notation:
 
-        // 4.  Write an extension method `Map` on `IDictionary<K, T>`, that takes a
-        // `Func<T, R>` and returns a new `Dictionary<K, R>`, mapping the original
-        // keys to the values resulting from applying the function to the values.
-    }
+      // bool isOdd(int i) => i % 2 == 1;
+      // new List<int>().Lookup(isOdd) // => None
+      // new List<int> { 1 }.Lookup(isOdd) // => Some(1)
 
-    // 6.  Write implementations for the methods in the `AppConfig` class
-    // below. (For both methods, a reasonable one-line method body is possible.
-    // Assume settings are of type string, numeric or date.) Can this
-    // implementation help you to test code that relies on settings in a
-    // `.config` file?
-    public class AppConfig
-    {
+      // 3 Write a type Email that wraps an underlying string, enforcing that it’s in a valid
+      // format. Ensure that you include the following:
+      // - A smart constructor
+      // - Implicit conversion to string, so that it can easily be used with the typical API
+      // for sending emails
+      
+      // 4 Take a look at the extension methods defined on IEnumerable inSystem.LINQ.Enumerable.
+      // Which ones could potentially return nothing, or throw some
+      // kind of not-found exception, and would therefore be good candidates for
+      // returning an Option<T> instead?
+   }
+
+   // 5.  Write implementations for the methods in the `AppConfig` class
+   // below. (For both methods, a reasonable one-line method body is possible.
+   // Assume settings are of type string, numeric or date.) Can this
+   // implementation help you to test code that relies on settings in a
+   // `.config` file?
+   public class AppConfig
+   {
       NameValueCollection source;
 
       //public AppConfig() : this(ConfigurationManager.AppSettings) { }
@@ -38,13 +50,13 @@ namespace Exercises.Chapter3
       }
 
       public Option<T> Get<T>(string name)
-        {
-            throw new NotImplementedException("your implementation here...");
-        }
+      {
+         throw new NotImplementedException("your implementation here...");
+      }
 
-        public T Get<T>(string name, T defaultValue)
-        {
-            throw new NotImplementedException("your implementation here...");
-        }
-    }
+      public T Get<T>(string name, T defaultValue)
+      {
+         throw new NotImplementedException("your implementation here...");
+      }
+   }
 }
