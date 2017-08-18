@@ -5,52 +5,32 @@ using LaYumba.Functional;
 
 namespace Exercises.Chapter4
 {
-   class Exercises
+   static class Exercises
    {
-      // 1. Without looking at any code or documentation (or intllisense), write the function signatures of
-      // `OrderByDescending`, `Take` and `Average`, which we used to implement `AverageEarningsOfRichestQuartile`:
-      decimal AverageEarningsOfRichestQuartile(List<Person> population)
-         => population
-            .OrderByDescending(p => p.Earnings)
-            .Take(population.Count/4)
-            .Select(p => p.Earnings)
-            .Average();
+      // 1 Implement Map for ISet<T> and IDictionary<K, T>. (Tip: start by writing down
+      // the signature in arrow notation.)
 
-      // 2. Check your answer with the msdn documentation: https://msdn.microsoft.com/en-us/library/system.linq.enumerable(v=vs.110).aspx. 
-      // How is `Average` different?
+      // 2 Implement Map for Option and IEnumerable in terms of Bind and Return.
 
-      // 3. Implement a general purpose `Compose` function that takes two unary functions
-      // and returns the composition of the two.
+      // 3 Use Bind and an Option-returning Lookup function (such as the one we defined
+      // in chapter 3) to implement GetWorkPermit, shown below. 
 
-      // 4. Implement a `Lookup` extension method on `IDictionary<T>` returning `Option<T>`.
-
-      // 5. Use `Bind` and the `Lookup` function from the previous exercise to
-      // implement `GetWorkPermit` below.Then enrich the implementation so that `GetWorkPermit`
+      // Then enrich the implementation so that `GetWorkPermit`
       // returns `None` if the work permit has expired.
 
-      Option<WorkPermit> GetWorkPermit(Dictionary<string, Employee> people, string employeeId)
+      static Option<WorkPermit> GetWorkPermit(Dictionary<string, Employee> people, string employeeId)
       {
          throw new NotImplementedException();
       }
 
-      // 6. Use `Bind` to implement `AverageYearsWorkedAtTheCompany` below(only
+      // 4 Use Bind to implement AverageYearsWorkedAtTheCompany, shown below (only
       // employees who have left should be included).
 
-      double AverageYearsWorkedAtTheCompany(List<Employee> employees)
+      static double AverageYearsWorkedAtTheCompany(List<Employee> employees)
       {
          // your implementation here...
          throw new NotImplementedException();
       }
-
-      // 7. Write implementations of `Where`, `ForEach` and `Bind` for
-      // `Container`. Try doing so without looking at the implementations for
-      // `Option` first, and only check them if needed.
-
-      // public static Container<R> Map ...
-      // public static Container<T> Where ...
-      // public static Container<R> Bind ...
-      // public static Unit ForEach ...
-
    }
 
    public struct WorkPermit
