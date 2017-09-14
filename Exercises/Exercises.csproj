@@ -11,7 +11,7 @@
 
     <packagereference Include="Microsoft.NET.Test.Sdk" Version="15.0.0"></packagereference>
     <packagereference Include="NUnit" Version="3.6.1"></packagereference>
-    <packagereference Include="NUnit3TestAdapter" Version="3.8.0-alpha1"></packagereference>
+    <packagereference Include="NUnit3TestAdapter" Version="3.8.0"></packagereference>
 
     <ProjectReference Include="..\Examples\Examples.csproj" />
     <ProjectReference Include="..\LaYumba.Functional.Data\LaYumba.Functional.Data.csproj" />

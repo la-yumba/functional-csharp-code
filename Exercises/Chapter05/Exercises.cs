@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Examples.Chapter3;
 
 namespace Exercises.Chapter5
 {
@@ -11,7 +12,7 @@ namespace Exercises.Chapter5
    {
       // 1. Without looking at any code or documentation (or intllisense), write the function signatures of
       // `OrderByDescending`, `Take` and `Average`, which we used to implement `AverageEarningsOfRichestQuartile`:
-      decimal AverageEarningsOfRichestQuartile(List<Person> population)
+      static decimal AverageEarningsOfRichestQuartile(List<Person> population)
          => population
             .OrderByDescending(p => p.Earnings)
             .Take(population.Count/4)

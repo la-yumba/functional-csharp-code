@@ -31,7 +31,7 @@
 
     <packagereference Include="Microsoft.NET.Test.Sdk" Version="15.0.0"></packagereference>
     <packagereference Include="NUnit" Version="3.6.1"></packagereference>
-    <packagereference Include="NUnit3TestAdapter" Version="3.8.0-alpha1"></packagereference>
+    <packagereference Include="NUnit3TestAdapter" Version="3.8.0"></packagereference>
   </ItemGroup>
 
   <ItemGroup>
