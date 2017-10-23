@@ -81,12 +81,14 @@ namespace Exercises.Chapter3
          }
 
          public Option<T> Get<T>(string key)
-            => Some((T)Convert.ChangeType(source[key], typeof(T)));
+            => source[key] == null
+               ? None
+               : Some((T)Convert.ChangeType(source[key], typeof(T)));
 
          public T Get<T>(string key, T defaultValue)
             => Get<T>(key).Match(
-               Some: value => value,
-               None: () => defaultValue);
+               () => defaultValue,
+               (value) => value);
       }
    }
 }
