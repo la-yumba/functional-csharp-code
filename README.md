@@ -2,9 +2,9 @@
 
 This repo contains the code samples, exercises and solutions for the book
 [Functional Programming in C#](https://www.manning.com/books/functional-programming-in-c-sharp?a_aid=functional-programming-in-c-sharp&a_bid=ad9af506)
-currently available as part of the Manning Early Access Program.
+published by Manning.
 
-[![Functional Programming in C#](https://images.manning.com/255/340/resize/book/1/b287ae1-c2bd-45ec-aa1b-deafdf104773/FPinCSharp_hires.png)](https://www.manning.com/books/functional-programming-in-c-sharp?a_aid=functional-programming-in-c-sharp&a_bid=ad9af506)
+[![Functional Programming in C#](cover.jpg)](https://www.manning.com/books/functional-programming-in-c-sharp?a_aid=functional-programming-in-c-sharp&a_bid=ad9af506)
 
 The code samples are organized in the following projects:
 
