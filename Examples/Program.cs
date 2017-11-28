@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using LaYumba.Functional;
 
 using System.Reflection;
+using Microsoft.AspNetCore;
 
 namespace Examples
 {
@@ -39,11 +40,8 @@ namespace Examples
       }
 
       static void StartWebApi()
-      { 
-         var host = new WebHostBuilder()
-            .UseKestrel()
-            .UseContentRoot(Directory.GetCurrentDirectory())
-            .UseIISIntegration()
+      {
+         var host = WebHost.CreateDefaultBuilder()
             .UseStartup<Boc.Startup>()
             .Build();
 
