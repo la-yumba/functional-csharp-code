@@ -12,26 +12,26 @@ The code samples are organized in the following projects:
 - **Exercises**: placeholders for you to do the exercises, compile and run them;
   and compare to the provided solutions
 - **LaYumba.Functional**: a functional library that we develop throughout the book
-- **LaYumba.Functional.Data**: very simple functional data structures discussed in Chapter 9 
+- **LaYumba.Functional.Data**: very simple functional data structures discussed in Chapter 9
 - **LaYumba.Functional.Tests**: also illustrative of topics explained in the book, and
   useful to better understand the constructs in the library
 - **Boc.Domain**: an example of using F# for domain objects
 
-**Note:** you are welcome to reference `LaYumba.Functional` from your projects 
+**Note:** you are welcome to reference `LaYumba.Functional` from your projects
 via [NuGet](https://www.nuget.org/packages/LaYumba.Functional), and submit
-PRs with improvements, but the main intent of this library is pedagogical. 
+PRs with improvements, but the main intent of this library is pedagogical.
 For a more fully-fledged functional library, consider [LanguageExt](https://github.com/louthy/language-ext)
 
 ## Working with the code samples
 
-The code samples use .NET Standard 1.6 and .NET Core 1.1, and should compile and run on all major OS's
+The code samples use .NET Standard 1.6 and .NET Core 2.0, and should compile and run on all major OS's
 via the `dotnet` CLI.
 
 ### Prerequisites
 
-- [.NET Core 1.1.1 SDK](https://www.microsoft.com/net/download/core)
+- [.NET Core 2.0.3 SDK](https://www.microsoft.com/net/download/core)
 
-To check this is available, type `dotnet --version` at the command prompt, and you should get `1.0.1` or greater
+To check this is available, type `dotnet --version` at the command prompt, and you should get `2.0.3` or greater
 
 ### One-time setup
 
@@ -62,7 +62,7 @@ $ cd Examples
 $ dotnet run Greetings
 ```
 
-| Section | Command 
+| Section | Command
 |---:| ---
 | 7.1 | `dotnet run Greetings`
 
@@ -75,14 +75,14 @@ Throughout the book, I encourage readers to try things out in the [REPL](https:/
 - On Mono, use the `csharp` command
 - There are several other REPLs available, some even run in the browser
 
-You'll often need to import `LaYumba.Functional` in the REPL. In C# Interactive, 
+You'll often need to import `LaYumba.Functional` in the REPL. In C# Interactive,
 this can be done like so:
 
 ```csharp
 #r "functional-csharp-code\LaYumba.Functional\bin\Debug\netstandard1.6\LaYumba.Functional.dll"
 ```
 
-The path above may not work for you, in which case use an absolute path to the dll, 
+The path above may not work for you, in which case use an absolute path to the dll,
 or type `Directory.GetCurrentDirectory()` into the REPL to see what to use as a base for a relative path.
 
 Next, add these imports:
