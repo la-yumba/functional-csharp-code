@@ -22,7 +22,7 @@ namespace LaYumba.Functional
       }
 
       public static Option<T> Find<T>(this IEnumerable<T> source, Func<T, bool> predicate)
-         => source.FirstOrDefault(predicate);
+         => source.Where(predicate).Head();
 
       public static T FirstOr<T>(this IEnumerable<T> source, T defaultValue)
          => source.Head().Match(
