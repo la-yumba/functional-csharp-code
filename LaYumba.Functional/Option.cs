@@ -92,6 +92,30 @@ namespace LaYumba.Functional
          (this Option<Func<T1, T2, T3, R>> @this, Option<T1> arg)
          => Apply(@this.Map(F.CurryFirst), arg);
 
+      public static Option<Func<T2, T3, T4, R>> Apply<T1, T2, T3, T4, R>
+         (this Option<Func<T1, T2, T3, T4, R>> @this, Option<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Option<Func<T2, T3, T4, T5, R>> Apply<T1, T2, T3, T4, T5, R>
+         (this Option<Func<T1, T2, T3, T4, T5, R>> @this, Option<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Option<Func<T2, T3, T4, T5, T6, R>> Apply<T1, T2, T3, T4, T5, T6, R>
+         (this Option<Func<T1, T2, T3, T4, T5, T6, R>> @this, Option<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Option<Func<T2, T3, T4, T5, T6, T7, R>> Apply<T1, T2, T3, T4, T5, T6, T7, R>
+         (this Option<Func<T1, T2, T3, T4, T5, T6, T7, R>> @this, Option<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Option<Func<T2, T3, T4, T5, T6, T7, T8, R>> Apply<T1, T2, T3, T4, T5, T6, T7, T8, R>
+         (this Option<Func<T1, T2, T3, T4, T5, T6, T7, T8, R>> @this, Option<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Option<Func<T2, T3, T4, T5, T6, T7, T8, T9, R>> Apply<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>
+         (this Option<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>> @this, Option<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
       public static Option<R> Bind<T, R>
          (this Option<T> optT, Func<T, Option<R>> f)
           => optT.Match(

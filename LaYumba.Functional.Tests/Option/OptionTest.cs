@@ -74,6 +74,21 @@ namespace LaYumba.Functional.Tests
       Func<int, int, int> add = (a, b) => a + b;
       Func<int, int, int> multiply = (i, j) => i * j;
 
+      private readonly Func<int, int, int, int> add3Integers = 
+         (a, b, c) => a + b + c;
+      private readonly Func<int, int, int, int, int> add4Integers = 
+         (a, b, c, d) => a + b + c + d;
+      private readonly Func<int, int, int, int, int, int> add5Integers = 
+         (a, b, c, d, e) => a + b + c + d + e;
+      private readonly Func<int, int, int, int, int, int, int> add6Integers = 
+         (a, b, c, d, e, f) => a + b + c + d + e + f;
+      private readonly Func<int, int, int, int, int, int, int, int> add7Integers = 
+         (a, b, c, d, e, f, g) => a + b + c + d + e + f + g;
+      private readonly Func<int, int, int, int, int, int, int, int, int> add8Integers = 
+         (a, b, c, d, e, f, g, h) => a + b + c + d + e + f + g + h;
+      private readonly Func<int, int, int, int, int, int, int, int, int, int> add9Integers = 
+         (a, b, c, d, e, f, g, h, i) => a + b + c + d + e + f + g + h + i;
+
       [Fact]
       public void MapAndApplySomeArg_ReturnsSome()
       {
@@ -107,6 +122,104 @@ namespace LaYumba.Functional.Tests
              .Apply(Some(4));
 
          Assert.Equal(Some(7), opt);
+      }
+
+      [Fact]
+      public void ApplySomeArgs_to_function_requiring_3_args()
+      {
+         var opt = Some(add3Integers)
+             .Apply(Some(1))
+             .Apply(Some(2))
+             .Apply(Some(3));
+
+         Assert.Equal(Some(6), opt);
+      }
+
+      [Fact]
+      public void ApplySomeArgs_to_function_requiring_4_args()
+      {
+         var opt = Some(add4Integers)
+             .Apply(Some(1))
+             .Apply(Some(2))
+             .Apply(Some(3))
+             .Apply(Some(4));
+
+         Assert.Equal(Some(10), opt);
+      }
+
+      [Fact]
+      public void ApplySomeArgs_to_function_requiring_5_args()
+      {
+         var opt = Some(add5Integers)
+             .Apply(Some(1))
+             .Apply(Some(2))
+             .Apply(Some(3))
+             .Apply(Some(4))
+             .Apply(Some(5));
+
+         Assert.Equal(Some(15), opt);
+      }
+
+      [Fact]
+      public void ApplySomeArgs_to_function_requiring_6_args()
+      {
+         var opt = Some(add6Integers)
+             .Apply(Some(1))
+             .Apply(Some(2))
+             .Apply(Some(3))
+             .Apply(Some(4))
+             .Apply(Some(5))
+             .Apply(Some(6));
+
+         Assert.Equal(Some(21), opt);
+      }
+
+      [Fact]
+      public void ApplySomeArgs_to_function_requiring_7_args()
+      {
+         var opt = Some(add7Integers)
+             .Apply(Some(1))
+             .Apply(Some(2))
+             .Apply(Some(3))
+             .Apply(Some(4))
+             .Apply(Some(5))
+             .Apply(Some(6))
+             .Apply(Some(7));
+
+         Assert.Equal(Some(28), opt);
+      }
+
+      [Fact]
+      public void ApplySomeArgs_to_function_requiring_8_args()
+      {
+         var opt = Some(add8Integers)
+             .Apply(Some(1))
+             .Apply(Some(2))
+             .Apply(Some(3))
+             .Apply(Some(4))
+             .Apply(Some(5))
+             .Apply(Some(6))
+             .Apply(Some(7))
+             .Apply(Some(8));
+
+         Assert.Equal(Some(36), opt);
+      }
+
+      [Fact]
+      public void ApplySomeArgs_to_function_requiring_9_args()
+      {
+         var opt = Some(add9Integers)
+             .Apply(Some(1))
+             .Apply(Some(2))
+             .Apply(Some(3))
+             .Apply(Some(4))
+             .Apply(Some(5))
+             .Apply(Some(6))
+             .Apply(Some(7))
+             .Apply(Some(8))
+             .Apply(Some(9));
+
+         Assert.Equal(Some(45), opt);
       }
 
       [Property]

@@ -27,6 +27,29 @@ namespace LaYumba.Functional
          (this Task<Func<T1, T2, T3, R>> @this, Task<T1> arg)
          => Apply(@this.Map(F.CurryFirst), arg);
 
+      public static Task<Func<T2, T3, T4, R>> Apply<T1, T2, T3, T4, R>
+         (this Task<Func<T1, T2, T3, T4, R>> @this, Task<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Task<Func<T2, T3, T4, T5, R>> Apply<T1, T2, T3, T4, T5, R>
+         (this Task<Func<T1, T2, T3, T4, T5, R>> @this, Task<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Task<Func<T2, T3, T4, T5, T6, R>> Apply<T1, T2, T3, T4, T5, T6, R>
+         (this Task<Func<T1, T2, T3, T4, T5, T6, R>> @this, Task<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Task<Func<T2, T3, T4, T5, T6, T7, R>> Apply<T1, T2, T3, T4, T5, T6, T7, R>
+         (this Task<Func<T1, T2, T3, T4, T5, T6, T7, R>> @this, Task<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Task<Func<T2, T3, T4, T5, T6, T7, T8, R>> Apply<T1, T2, T3, T4, T5, T6, T7, T8, R>
+         (this Task<Func<T1, T2, T3, T4, T5, T6, T7, T8, R>> @this, Task<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Task<Func<T2, T3, T4, T5, T6, T7, T8, T9, R>> Apply<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>
+         (this Task<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>> @this, Task<T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
 
       public static async Task<R> Map<T, R>
          (this Task<T> task, Func<T, R> f)
@@ -46,6 +69,30 @@ namespace LaYumba.Functional
 
       public static Task<Func<T2, T3, R>> Map<T1, T2, T3, R>
          (this Task<T1> @this, Func<T1, T2, T3, R> func)
+          => @this.Map(func.CurryFirst());
+
+      public static Task<Func<T2, T3, T4, R>> Map<T1, T2, T3, T4, R>
+         (this Task<T1> @this, Func<T1, T2, T3, T4, R> func)
+          => @this.Map(func.CurryFirst());
+
+      public static Task<Func<T2, T3, T4, T5, R>> Map<T1, T2, T3, T4, T5, R>
+         (this Task<T1> @this, Func<T1, T2, T3, T4, T5, R> func)
+          => @this.Map(func.CurryFirst());
+
+      public static Task<Func<T2, T3, T4, T5, T6, R>> Map<T1, T2, T3, T4, T5, T6, R>
+         (this Task<T1> @this, Func<T1, T2, T3, T4, T5, T6, R> func)
+          => @this.Map(func.CurryFirst());
+
+      public static Task<Func<T2, T3, T4, T5, T6, T7, R>> Map<T1, T2, T3, T4, T5, T6, T7, R>
+         (this Task<T1> @this, Func<T1, T2, T3, T4, T5, T6, T7, R> func)
+          => @this.Map(func.CurryFirst());
+
+      public static Task<Func<T2, T3, T4, T5, T6, T7, T8, R>> Map<T1, T2, T3, T4, T5, T6, T7, T8, R>
+         (this Task<T1> @this, Func<T1, T2, T3, T4, T5, T6, T7, T8, R> func)
+          => @this.Map(func.CurryFirst());
+
+      public static Task<Func<T2, T3, T4, T5, T6, T7, T8, T9, R>> Map<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>
+         (this Task<T1> @this, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> func)
           => @this.Map(func.CurryFirst());
 
       public static Task<R> Map<T, R>
