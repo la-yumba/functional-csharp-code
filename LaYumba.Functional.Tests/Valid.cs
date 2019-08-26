@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Linq;
 using Xunit;
 using static LaYumba.Functional.F;
 
 namespace LaYumba.Functional.Tests
 {
-   class Valid_Test
+   public class Valid_Test
    {
       Validation<int> Invalid(string m = "Some error") => new Error(m);
 
