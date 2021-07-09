@@ -101,6 +101,47 @@ namespace LaYumba.Functional
             r => f(r));
 
 
+        // Applicative
+
+        public static Either<L, RR> Apply<L, R, RR>
+           (this Either<L, Func<R, RR>> @this, Either<L, R> arg)
+           => @this.Match(
+              Left: (errF) => Left(errF),
+              Right: (f) => arg.Match<Either<L, RR>>(
+                 Left: (err) => Left(err),
+                 Right: (t) => Right(f(t))));
+        
+      public static Either<L, Func<T2, R>> Apply<L, T1, T2, R>
+         (this Either<L, Func<T1, T2, R>> @this, Either<L, T1> arg)
+         => Apply(@this.Map(F.Curry), arg);
+
+      public static Either<L, Func<T2, T3, R>> Apply<L, T1, T2, T3, R>
+         (this Either<L, Func<T1, T2, T3, R>> @this, Either<L, T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Either<L, Func<T2, T3, T4, R>> Apply<L, T1, T2, T3, T4, R>
+         (this Either<L, Func<T1, T2, T3, T4, R>> @this, Either<L, T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Either<L, Func<T2, T3, T4, T5, R>> Apply<L, T1, T2, T3, T4, T5, R>
+         (this Either<L, Func<T1, T2, T3, T4, T5, R>> @this, Either<L, T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Either<L, Func<T2, T3, T4, T5, T6, R>> Apply<L, T1, T2, T3, T4, T5, T6, R>
+         (this Either<L, Func<T1, T2, T3, T4, T5, T6, R>> @this, Either<L, T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Either<L, Func<T2, T3, T4, T5, T6, T7, R>> Apply<L, T1, T2, T3, T4, T5, T6, T7, R>
+         (this Either<L, Func<T1, T2, T3, T4, T5, T6, T7, R>> @this, Either<L, T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Either<L, Func<T2, T3, T4, T5, T6, T7, T8, R>> Apply<L, T1, T2, T3, T4, T5, T6, T7, T8, R>
+         (this Either<L, Func<T1, T2, T3, T4, T5, T6, T7, T8, R>> @this, Either<L, T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
+
+      public static Either<L, Func<T2, T3, T4, T5, T6, T7, T8, T9, R>> Apply<L, T1, T2, T3, T4, T5, T6, T7, T8, T9, R>
+         (this Either<L, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>> @this, Either<L, T1> arg)
+         => Apply(@this.Map(F.CurryFirst), arg);
       // LINQ
 
       public static Either<L, R> Select<L, T, R>(this Either<L, T> @this
