@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
 
     <PackageReference Include="Dapper" Version="1.50.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
     <PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
